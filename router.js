@@ -9,7 +9,7 @@
     var _hashHandlers = [];
     // Route构造函数
     var R = function () {
-        var tempThis = this;
+        var that = this;
         // binding routes
         _bindRoutes = function () {
             if ( !this.routes )
@@ -45,7 +45,7 @@
      */
     R.start = function () {
         if ( !isRouteStart ) {
-            var tempThis = this;
+            var that = this;
             function hashChange () {    
                 var hash = window.location.hash;
                 var route = this.trigger ( hash.replace ( routeFn.routeStripper, '' ) );    //router的渲染函数
@@ -54,14 +54,14 @@
             //浏览器支持使用hashchange
             if( 'onhashchange' in window ) {
                 window.onhashchange = function () {
-                    hashChange.call ( tempThis.prototype );
+                    hashChange.call ( that.prototype );
                 }
             } else {//浏览器不支持hashchange使用轮询
                 setInterval(function () {
                     var hash = window.location.hash;
-                    if(hash != tempThis.fragment) {
-                        tempThis.fragment = hash;
-                        hashChange.call ( tempThis.prototype );
+                    if(hash != that.fragment) {
+                        that.fragment = hash;
+                        hashChange.call ( that.prototype );
                     }
                 }, 50);
             }
@@ -89,7 +89,7 @@
      */
     R.prototype.trigger = function ( fragment ) {
         var matched;
-        var tempThis = this;
+        var that = this;
         routeFn.any ( _handlers, function ( handler ) {
             if ( handler.route.test ( fragment ) ) {
                 //route handler调用前调用的方法
