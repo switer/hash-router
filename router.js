@@ -35,7 +35,6 @@
         try {
             new route;
         } catch(e) {
-            //console.log(page + 'Route:' + e.type);
             return;
         }
         R.start();
@@ -225,6 +224,6 @@
         }
     };
 
-    exports.Router = R;
+    exports.Turn = R;
 }(window);
 
